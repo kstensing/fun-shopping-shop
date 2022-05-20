@@ -11,41 +11,30 @@ import {
     UPDATE_CART_QUANTITY,
     CLEAR_CART,
     TOGGLE_CART
-  } from './actions';
+  } from './reducer';
   
   import { createSlice } from "@reduxjs/toolkit"
   
   export const counterSlice = createSlice ({ 
-      name: "shop",
+    name: "shop-slice",
       initialState: {
         products: [],
-        categories: [{ name: 'Food' }],
-        currentCategory: '1',
-        cart: [
-           {
-         _id: '1',
-         name: 'Soup',
-         purchaseQuantity: 1
-        },
-        {
-          _id: '2',
-         name: 'Bread',
-         purchaseQuantity: 2
-         }
-         ],
-        cartOpen: false
-      },
+        cart: [],
+        cartOpen: false,
+        categories: [],
+        currentCategory: ''
+    },
     });
       
       export default function shopReducers(state = initialState, action) {
         switch (action.type) {
-        case "UPDATE_PRODUCTS":
-            return {
-          (state) => {products: [...action.products]}
-          ,
+        case UPDATE_PRODUCTS: 
+        return {
+          ...state,
+          products: [...action.products],
         };
   
-      case "UPDATE_CATEGORIES":
+      case UPDATE_CATEGORIES:
         return {
           ...state,
           categories: [...action.categories],
@@ -107,8 +96,7 @@ import {
           };
         default:
           return state;
-    }}
-  };
+    }};
   
   export function useProductReducer(initialState) {
     return useReducer(reducer, initialState)

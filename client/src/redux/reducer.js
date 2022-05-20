@@ -1,4 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAction } from '@reduxjs/toolkit'
+
+
 
 export const slice = createSlice({
     name: "shop-slice",
@@ -11,7 +13,9 @@ export const slice = createSlice({
     },
     reducers: {
         UPDATE_PRODUCTS: (state) => {
-            {products: [...action.products]}
+            return {
+                ...state,
+                products: [...action.products]}
         },
         UPDATE_CATEGORIES: (state) => {
         return {
