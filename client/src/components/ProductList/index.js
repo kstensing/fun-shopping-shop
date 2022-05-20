@@ -15,6 +15,8 @@ function ProductList() {
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
+  
+
   useEffect(() => {
     // if there's data to be stored
     if (data) {
