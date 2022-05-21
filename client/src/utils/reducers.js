@@ -93,19 +93,3 @@ export default function reducer(state = initialState, action) {
         return state;
   }
 };
-
-//export default function reducers(state = initialState, action);
-
-
-// // Redux tutorial
-// import shopReducers from '../redux/counter';
-// import { combineReducers } from 'redux'
-
-// const rootReducer = combineReducers ({
-//   // always return a new object for the root state
-//     // the value of `state.todos` is whatever the todos reducer returns
-//     shop: shopReducers(state.shop, action)
-//     // For both reducers, we only pass in their slice of the state
-//   })
-
-//   export default rootReducer
