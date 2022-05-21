@@ -20,36 +20,37 @@ const shopSlice = createSlice({
     currentCategory: ''
   },
   reducers: {
-    UPDATE_PRODUCTS(state, action) {
+    UPDATE_PRODUCTS: (state, action) => {
       return {
         ...state,
         products: [...action.products]
       }
     },
-    UPDATE_CATEGORIES(state, action) {
-      state.categories += action.categories
+    UPDATE_CATEGORIES: (state, action) => {
+      console.log('update categories')
+      state.categories += action.payload
     },
 
-    UPDATE_CURRENT_CATEGORY(state, action) {
+    UPDATE_CURRENT_CATEGORY: (state, action) => {
       return {
         ...state,
         currentCategory: action.currentCategory
       }
     },
-    ADD_TO_CART(state, action) {
+    ADD_TO_CART: (state, action) => {
       return {
         ...state,
         cartOpen: true,
         cart: [...state.cart, action.product]
       };
     },
-    ADD_MULTIPLE_TO_CART(state, action) {
+    ADD_MULTIPLE_TO_CART: (state, action) => {
       return {
         ...state,
         cart: [...state.cart, ...action.products],
       };
     },
-    REMOVE_FROM_CART(state, action) {
+    REMOVE_FROM_CART: (state, action) => {
       let newState = state.cart.filter(product => {
         return product._id !== action._id;
       });
@@ -60,7 +61,7 @@ const shopSlice = createSlice({
         cart: newState
       };
     },
-    UPDATE_CART_QUANTITY(state, action) {
+    UPDATE_CART_QUANTITY: (state, action) => {
       return {
         ...state,
         cartOpen: true,
@@ -72,14 +73,14 @@ const shopSlice = createSlice({
         })
       };
     },
-    CLEAR_CART(state, action) {
+    CLEAR_CART: (state, action) => {
       return {
         ...state,
         cartOpen: false,
         cart: []
       };
     },
-    TOGGLE_CART(state, action) {
+    TOGGLE_CART: (state, action) => {
       return {
         ...state,
         cartOpen: !state.cartOpen

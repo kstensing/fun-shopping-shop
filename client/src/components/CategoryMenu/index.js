@@ -15,12 +15,13 @@ function CategoryMenu() {
 
   const dispatch = useDispatch()
 
-  const { categories } = useSelector((state) => state.shop.categories.value)
+  const {categories} = useSelector((state) => state.shop.categories)
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   useEffect(() => {
     if (categoryData) {
+      console.log(categoryData)
       dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
@@ -29,6 +30,7 @@ function CategoryMenu() {
         idbPromise('categories', 'put', category);
       });
     } else if (!loading) {
+      console.log('loading')
       idbPromise('categories', 'get').then(categories => {
         dispatch({
           type: UPDATE_CATEGORIES,

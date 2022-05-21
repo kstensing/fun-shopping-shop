@@ -15,8 +15,8 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 const Cart = () => {
   //const [state, dispatch] = useStoreContext();
 
-  const { cart, cartOpen } = useSelector((state) => ({
-    cart: state.shop.cart.value,
+  const { state, cartOpen } = useSelector((state) => ({
+    state: state.shop,
     cartOpen: state.shop.cartOpen.value
   }), shallowEqual);
 
@@ -38,10 +38,10 @@ const Cart = () => {
       dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
     }
 
-    if (!cart.length) {
+    if (!state.cart.length) {
       getCart();
     }
-  }, [cart.length, dispatch]);
+  }, [state.cart.length, dispatch]);
 
   function toggleCart() {
     dispatch({ type: TOGGLE_CART });
@@ -49,7 +49,7 @@ const Cart = () => {
 
   function calculateTotal() {
     let sum = 0;
-    cart.forEach((item) => {
+    state.cart.forEach((item) => {
       sum += item.price * item.purchaseQuantity;
     });
     return sum.toFixed(2);
@@ -58,7 +58,7 @@ const Cart = () => {
   function submitCheckout() {
     const productIds = [];
 
-    cart.forEach((item) => {
+    state.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
         productIds.push(item._id);
       }
@@ -85,9 +85,9 @@ const Cart = () => {
         [close]
       </div>
       <h2>Shopping Cart</h2>
-      {cart.length ? (
+      {state.cart.length ? (
         <div>
-          {cart.map((item) => (
+          {state.cart.map((item) => (
             <CartItem key={item._id} item={item} />
           ))}
 

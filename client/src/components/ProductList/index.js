@@ -12,9 +12,9 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 function ProductList() {
   //const [state, dispatch] = useStoreContext();
 
-  const { currentCategory, products } = useSelector((state) => ({
+  const { currentCategory, state } = useSelector((state) => ({
     currentCategory: state.shop.currentCategory.value,
-    products: state.shop.products.value,
+    state: state.shop,
   }), shallowEqual);
   
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function ProductList() {
       // use retrieved data to set global state for offline browsing
       dispatch({
         type: UPDATE_PRODUCTS,
-        products: products
+        products: state.products
       });
     });
   }
@@ -50,10 +50,10 @@ function ProductList() {
 
   function filterProducts() {
     if (!currentCategory) {
-      return products;
+      return state.products;
     }
 
-    return products.filter(
+    return state.products.filter(
       (product) => product.category._id === currentCategory
     );
   }
@@ -61,7 +61,7 @@ function ProductList() {
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {products.length ? (
+      {state.products.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
             <ProductItem
