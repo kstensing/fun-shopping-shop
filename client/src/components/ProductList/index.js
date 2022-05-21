@@ -7,13 +7,16 @@ import { UPDATE_PRODUCTS } from '../../redux/shopSliceReducer';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { idbPromise } from "../../utils/helpers";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 function ProductList() {
   //const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = useSelector((state) => state.shop.currentCategory.value);
-  const { products } = useSelector((state) => state.shop.products.value);
+  const { currentCategory, products } = useSelector((state) => ({
+    currentCategory: state.shop.currentCategory.value,
+    products: state.shop.products.value,
+  }), shallowEqual);
+  
   const dispatch = useDispatch();
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);

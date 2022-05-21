@@ -14,7 +14,7 @@ import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 
 function Detail() {
@@ -27,8 +27,10 @@ function Detail() {
 
   const dispatch = useDispatch()
 
-  const { products } = useSelector((state) => state.shop.products.value)
-  const { cart } = useSelector((state) => state.shop.cart.value)
+  const { products, cart } = useSelector((state) => ({
+    products: state.shop.products.value,
+    cart: state.shop.cart.value,
+  }), shallowEqual);
 
   useEffect(() => {
     // already in global store

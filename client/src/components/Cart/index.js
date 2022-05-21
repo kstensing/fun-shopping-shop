@@ -7,7 +7,7 @@ import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 //import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../redux/shopSliceReducer';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import './style.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -15,8 +15,10 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 const Cart = () => {
   //const [state, dispatch] = useStoreContext();
 
-  const { cart } = useSelector((state) => state.shop.cart.value)
-  const { cartOpen } = useSelector((state) => state.shop.cartOpen.value)
+  const { cart, cartOpen } = useSelector((state) => ({
+    cart: state.shop.cart.value,
+    cartOpen: state.shop.cartOpen.value
+  }), shallowEqual);
 
   const dispatch = useDispatch()
 
