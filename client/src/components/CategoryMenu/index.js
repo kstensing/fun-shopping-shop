@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
-} from '../../redux/shopSliceReducer';
+} from "../../utils/actions";
 import { useSelector, useDispatch } from 'react-redux'
 
 import { QUERY_CATEGORIES } from '../../utils/queries';
@@ -14,14 +14,13 @@ function CategoryMenu() {
   //const [state, dispatch] = useStoreContext();
 
   const dispatch = useDispatch()
-
-  const { categories } = useSelector((state) => state.shop.categories)
+  const state = useSelector((state) => state);
+  //const { categories } = state
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   useEffect(() => {
     if (categoryData) {
-      console.log(categoryData)
       dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
@@ -50,9 +49,10 @@ function CategoryMenu() {
   return (
     <div>
       <h2>Choose a Category:</h2>
-      {categories ? (
+      {state.categories && state.categories.length ? (
         <div>
-      {categories.map((item) => (
+        
+      {state.categories.map((item) => (
         <button
           key={item._id}
           onClick={() => {

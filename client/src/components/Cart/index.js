@@ -6,7 +6,7 @@ import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 //import { useStoreContext } from '../../utils/GlobalState';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../redux/shopSliceReducer';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import './style.css';
 
@@ -16,8 +16,8 @@ const Cart = () => {
   //const [state, dispatch] = useStoreContext();
 
   const { state, cartOpen } = useSelector((state) => ({
-    state: state.shop,
-    cartOpen: state.shop.cartOpen.value
+    state: state,
+    cartOpen: state.cartOpen.value
   }), shallowEqual);
 
   const dispatch = useDispatch()

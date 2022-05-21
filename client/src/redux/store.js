@@ -1,19 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import shopSliceReducer from "./shopSliceReducer"
+import { createStore } from 'redux'
+//import shopSliceReducer from "./shopSliceReducer"
 
-// export default configureStore({
-//     reducer: reducer
+// const store = configureStore({
+//   reducer: {
+//     shop: shopSliceReducer,
+//   }
 // })
 
-//import todosReducer from './features/todos/todosSlice'
-//import filtersReducer from './features/filters/filtersSlice'
+// export default store
 
-const store = configureStore({
-  reducer: {
-    // Define a top-level state field named `todos`, handled by `todosReducer`
-    shop: shopSliceReducer,
-    //filters: filtersReducer
-  }
-})
+// const createStore from "redux;" 
+import reducers from "../utils/reducers";
 
-export default store
+const store = createStore(reducers);
+
+export default store;

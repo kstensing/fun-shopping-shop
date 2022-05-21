@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import ProductItem from '../ProductItem';
 //import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../redux/shopSliceReducer';
+import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { idbPromise } from "../../utils/helpers";
@@ -13,8 +13,8 @@ function ProductList() {
   //const [state, dispatch] = useStoreContext();
 
   const { currentCategory, state } = useSelector((state) => ({
-    currentCategory: state.shop.currentCategory.value,
-    state: state.shop,
+    currentCategory: state.currentCategory.value,
+    state: state,
   }), shallowEqual);
   
   const dispatch = useDispatch();
@@ -42,13 +42,14 @@ function ProductList() {
       // use retrieved data to set global state for offline browsing
       dispatch({
         type: UPDATE_PRODUCTS,
-        products: state.products
+        products: products
       });
     });
   }
 }, [data, loading, dispatch]);
 
   function filterProducts() {
+    console.log(currentCategory)
     if (!currentCategory) {
       return state.products;
     }
