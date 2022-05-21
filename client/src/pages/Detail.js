@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-//import { useStoreContext } from '../utils/GlobalState';
-//import store from '../redux/store';
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
@@ -18,7 +16,6 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 
 function Detail() {
-  //const [state, dispatch] = store();
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
@@ -28,8 +25,8 @@ function Detail() {
   const dispatch = useDispatch()
 
   const { products, cart } = useSelector((state) => ({
-    products: state.shop.products.value,
-    cart: state.shop.cart.value,
+    products: state.products,
+    cart: state.cart,
   }), shallowEqual);
 
   useEffect(() => {

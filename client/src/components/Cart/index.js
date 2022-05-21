@@ -5,7 +5,6 @@ import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
-//import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import './style.css';
@@ -13,11 +12,9 @@ import './style.css';
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-  //const [state, dispatch] = useStoreContext();
-
   const { state, cartOpen } = useSelector((state) => ({
     state: state,
-    cartOpen: state.cartOpen.value
+    cartOpen: state.cartOpen
   }), shallowEqual);
 
   const dispatch = useDispatch()
