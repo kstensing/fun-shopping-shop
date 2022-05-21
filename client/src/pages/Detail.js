@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 //import { useStoreContext } from '../utils/GlobalState';
-import store from '../redux/store';
+//import store from '../redux/store';
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
@@ -14,17 +14,21 @@ import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
+import { useSelector, useDispatch } from 'react-redux'
 
 
 function Detail() {
-  const [state, dispatch] = store();
+  //const [state, dispatch] = store();
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  const { products, cart } = state;
+  const dispatch = useDispatch()
+
+  const { products } = useSelector((state) => state.shop.products.value)
+  const { cart } = useSelector((state) => state.shop.cart.value)
 
   useEffect(() => {
     // already in global store

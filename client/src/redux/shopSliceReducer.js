@@ -2,29 +2,23 @@ import {
   createSlice
 } from '@reduxjs/toolkit'
 
-// import {
-//   UPDATE_PRODUCTS,
-//   UPDATE_CATEGORIES,
-//   UPDATE_CURRENT_CATEGORY,
-//   ADD_TO_CART,
-//   ADD_MULTIPLE_TO_CART,
-//   REMOVE_FROM_CART,
-//   UPDATE_CART_QUANTITY,
-//   CLEAR_CART,
-//   TOGGLE_CART
-// } from '..utils/actions';
-
-const initialState = {
-  products: [],
-  cart: [],
-  cartOpen: false,
-  categories: [],
-  currentCategory: ''
-}
+// const initialState = {
+//   products: [],
+//   cart: [],
+//   cartOpen: false,
+//   categories: [],
+//   currentCategory: ''
+// }
 
 const shopSlice = createSlice({
   name: "shop",
-  initialState,
+  initialState: {
+    products: [],
+    cart: [],
+    cartOpen: false,
+    categories: [],
+    currentCategory: ''
+  },
   reducers: {
     UPDATE_PRODUCTS(state, action) {
       return {
@@ -33,10 +27,7 @@ const shopSlice = createSlice({
       }
     },
     UPDATE_CATEGORIES(state, action) {
-      return {
-        ...state,
-        categories: [...action.categories],
-      };
+      state.categories += action.categories
     },
 
     UPDATE_CURRENT_CATEGORY(state, action) {

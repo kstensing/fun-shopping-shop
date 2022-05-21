@@ -11,7 +11,7 @@ import shopSliceReducer from "./shopSliceReducer"
 const store = configureStore({
   reducer: {
     // Define a top-level state field named `todos`, handled by `todosReducer`
-    shopSlice: shopSliceReducer,
+    shop: shopSliceReducer,
     //filters: filtersReducer
   }
 })

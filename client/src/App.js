@@ -41,7 +41,6 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          
             <Nav />
             <Routes>
               <Route 
@@ -73,7 +72,6 @@ function App() {
                 element={<Success />}
               />
             </Routes>
-          
         </div>
       </Router>
     </ApolloProvider>
