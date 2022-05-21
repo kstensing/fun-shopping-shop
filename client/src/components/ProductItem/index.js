@@ -18,7 +18,7 @@ function ProductItem(item) {
 
   //const [state, dispatch] = useStoreContext();
 
-  const { cart } = useSelector((state) => state.shop.cart.value);
+  const { cart } = useSelector((state) => state.shop.cart);
 
   const dispatch = useDispatch()
 
